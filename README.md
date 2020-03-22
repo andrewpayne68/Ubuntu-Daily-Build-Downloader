@@ -15,7 +15,7 @@ Uses zsync to effeciently download the changes to the file if already downloaded
 
 ## Usage
 
-```../getiso.sh```
+```./getiso.sh```
 
 Will create a folder for each flavour and download the iso into it.
 
