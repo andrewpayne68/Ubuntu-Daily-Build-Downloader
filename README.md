@@ -26,5 +26,16 @@ SERIES="focal"
 TYPE="desktop"
 ARCH="amd64"
 ```
+### Select flavour download
+
+Rather than downloading all of the flavour you can  add the flavour name to download that specific flavour eg.
+```
+./getiso.sh ubuntu kubuntu
+```
+to download only the ubuntu and kubuntu flavours.
+
+## About
+
+Written by digitalight (Mike Glover)
 
 Inspired by Alan Pope ubuntu testing youtube videos.
