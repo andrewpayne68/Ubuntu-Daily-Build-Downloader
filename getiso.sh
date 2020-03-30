@@ -2,12 +2,32 @@
 SERIES="focal"
 TYPE="desktop"
 ARCH="amd64"
+FLAVOURS=("lubuntu" "ubuntu" "ubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
 
-for d in lubuntu ubuntu xubuntu ubuntu-budgie kubuntu ubuntu-mate;
-do
-	echo $d
-	mkdir -p ./$d
-	cd $d
-	zsync http://cdimage.ubuntu.com/$d/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
+function download() {
+	# Error handling if known flavour
+	if [[ ! "${FLAVOURS[@]}" =~ "$1" ]]; then
+    echo "ERROR: $1 does not exit"
+    return
+	fi
+	echo $1
+	mkdir -p ./$1
+	cd $1
+	zsync http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
 	cd ..
+}
+
+# all flavours
+if [ $# == 0 ]
+	then
+	for d in "${FLAVOURS[@]}";
+	do
+		download $d
+	done
+fi
+
+# select flavours 
+while [ $# -gt 0 ]; do
+	download $1
+	shift;
 done
