@@ -2,7 +2,7 @@
 SERIES="focal"
 TYPE="desktop"
 ARCH="amd64"
-FLAVOURS=("lubuntu" "ubuntu" "ubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
+FLAVOURS=("lubuntu" "ubuntu" "xubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
 
 function download() {
 	# Error handling if known flavour
