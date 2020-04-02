@@ -16,10 +16,11 @@ function copy2usb() {
     m=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
     # get first 10 characters of date YYYY-MM-DD put it into $m
     m=${m:0:10}
-    echo Removing old iso ...
-    rm $E2B_DRIVE/$1-*
+	mkdir -p $E2B_DRIVE/$1-$SERIES
     echo Copying $1-$m ...
-	rsync --progress --checksum $1/$SERIES-$TYPE-$ARCH.iso $E2B_DRIVE/$1-$m.iso
+	rsync --progress --checksum $1/$SERIES-$TYPE-$ARCH.iso $E2B_DRIVE/$1-$SERIES/$1-$m.iso
+	echo Removing old iso ...
+	find $E2B_DRIVE/$1-$SERIES/ -type f ! -name "$1-$m.iso" -exec rm -rf {} \;
 }
 
 # all flavours
