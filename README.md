@@ -34,6 +34,13 @@ Rather than downloading all of the flavour you can  add the flavour name to down
 ```
 to download only the ubuntu and kubuntu flavours.
 
+### copy2usb
+
+Extra script for copying the downloaded iso's to an Easy2Boot drive.
+
+It labels the iso's with the flavour and date modified for easy identification. You can also select to copy select flavours.
+
+Please modify the E2B_DRIVE variable in the script to the path of your drive.
 ## About
 
 Written by digitalight (Mike Glover)
