@@ -1,0 +1,38 @@
+#!/bin/bash
+SERIES="focal"
+TYPE="desktop"
+ARCH="amd64"
+FLAVOURS=("lubuntu" "ubuntu" "xubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
+E2B_DRIVE="/media/mike/EASY2BOOT/_ISO/LINUX"
+
+function copy2usb() {
+	# Error handling if known flavour
+	if [[ ! "${FLAVOURS[@]}" =~ "$1" ]]; then
+    echo "ERROR: $1 does not exit"
+    return
+	fi
+    echo $1
+    # get modified date of file
+    m=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
+    # get first 10 characters of date YYYY-MM-DD put it into $m
+    m=${m:0:10}
+    echo Removing old iso ...
+    rm $E2B_DRIVE/$1-*
+    echo Copying $1-$m ...
+	rsync --progress --checksum $1/$SERIES-$TYPE-$ARCH.iso $E2B_DRIVE/$1-$m.iso
+}
+
+# all flavours
+if [ $# == 0 ]
+	then
+	for d in "${FLAVOURS[@]}";
+	do
+		copy2usb $d
+	done
+fi
+
+# select flavours 
+while [ $# -gt 0 ]; do
+	copy2usb $1
+	shift;
+done
