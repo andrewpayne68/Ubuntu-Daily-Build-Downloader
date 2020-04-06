@@ -17,6 +17,35 @@ function download() {
 	cd ..
 }
 
+function info() {
+	# get remote zsync file
+	wget -q http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync -O /tmp/${1}.zsync
+	# get modified date of local file
+	if [ -f "$1/$SERIES-$TYPE-$ARCH.iso" ]; then
+    	ml=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
+		# get first 10 characters of date YYYY-MM-DD put it into $m
+		ml=${ml:0:10}
+	else
+		ml="Missing"
+	fi
+	# get modified date of remote file
+	mr=$(eval "stat -c %y /tmp/${1}.zsync")
+	mr=${mr:0:10}
+	#echo "$d:			Local:$ml			Remote:$mr"
+	printf "%14s %11s %11s\n" $d $ml $mr
+	rm /tmp/${1}.zsync
+}
+
+if [ $1 == "--info" ];
+	then
+	printf "%14s %11s %11s\n" "Flavour" "Local" "Remote"
+	for d in "${FLAVOURS[@]}"
+	do
+		info $d
+	done
+	exit
+fi
+
 # all flavours
 if [ $# == 0 ]
 	then
