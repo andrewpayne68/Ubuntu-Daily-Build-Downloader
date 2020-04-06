@@ -14,6 +14,7 @@ function download() {
 	mkdir -p ./$1
 	cd $1
 	zsync http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
+	rm *.zs-old
 	cd ..
 }
 
