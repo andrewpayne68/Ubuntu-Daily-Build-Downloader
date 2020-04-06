@@ -34,6 +34,10 @@ Rather than downloading all of the flavour you can  add the flavour name to down
 ```
 to download only the ubuntu and kubuntu flavours.
 
+### Info
+
+To compare what version you have locally downloaded and what is avaliable on cdimages server. Use `./getiso.sh --info`
+
 ### copy2usb
 
 Extra script for copying the downloaded iso's to an Easy2Boot drive.
