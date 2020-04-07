@@ -20,7 +20,7 @@ function download() {
 
 function info() {
 	# get remote zsync file
-	wget -q http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync -O /tmp/${1}.zsync
+	wget -q http://cdimage.ubuntu.com/$1/daily-live/current/MD5SUMS -O /tmp/${1}.md5sums
 	# get modified date of local file
 	if [ -f "$1/$SERIES-$TYPE-$ARCH.iso" ]; then
     	ml=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
@@ -30,11 +30,11 @@ function info() {
 		ml="Missing"
 	fi
 	# get modified date of remote file
-	mr=$(eval "stat -c %y /tmp/${1}.zsync")
+	mr=$(eval "stat -c %y /tmp/${1}.md5sums")
 	mr=${mr:0:10}
 	#echo "$d:			Local:$ml			Remote:$mr"
 	printf "%14s %11s %11s\n" $d $ml $mr
-	rm /tmp/${1}.zsync
+	rm /tmp/${1}.md5sums
 }
 
 if [ $1 == "--info" ];
