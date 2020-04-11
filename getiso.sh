@@ -1,8 +1,9 @@
 #!/bin/bash
-SERIES="focal"
-TYPE="desktop"
-ARCH="amd64"
-FLAVOURS=("lubuntu" "ubuntu" "xubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
+if [ ! -f settings.conf ]; then
+echo "No settings.conf found! Look at settings-example.conf for instructions."
+else
+source settings.conf
+fi
 
 function download() {
 	# Error handling if known flavour
@@ -11,8 +12,8 @@ function download() {
     return
 	fi
 	echo $1
-	mkdir -p ./$1
-	cd $1
+	mkdir -p $DEST$1
+	cd $DEST$1
 	zsync http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
 	rm *.zs-old
 	cd ..
@@ -22,8 +23,8 @@ function info() {
 	# get remote zsync file
 	wget -q http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.list -O /tmp/${1}.list
 	# get modified date of local file
-	if [ -f "$1/$SERIES-$TYPE-$ARCH.iso" ]; then
-    	ml=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
+	if [ -f "$DEST$1/$SERIES-$TYPE-$ARCH.iso" ]; then
+    	ml=$(eval "stat -c %y $DEST$1/$SERIES-$TYPE-$ARCH.iso")
 		# get first 10 characters of date YYYY-MM-DD put it into $m
 		ml=${ml:0:10}
 	else
