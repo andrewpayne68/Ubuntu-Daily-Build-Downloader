@@ -1,9 +1,9 @@
 #!/bin/bash
-SERIES="focal"
-TYPE="desktop"
-ARCH="amd64"
-FLAVOURS=("lubuntu" "ubuntu" "xubuntu" "ubuntu-budgie" "kubuntu" "ubuntu-mate")
-E2B_DRIVE="/media/mike/EASY2BOOT/_ISO/LINUX"
+if [ ! -f settings.conf ]; then
+echo "No settings.conf found! Look at settings-example.conf for instructions."
+else
+source settings.conf
+fi
 
 function copy2usb() {
 	# Error handling if known flavour
@@ -13,11 +13,11 @@ function copy2usb() {
 	fi
     echo $1
     # get modified date of file
-    m=$(eval "stat -c %y $1/$SERIES-$TYPE-$ARCH.iso")
+    m=$(eval "stat -c %y $DEST$1/$SERIES-$TYPE-$ARCH.iso")
     # get first 10 characters of date YYYY-MM-DD put it into $m
     m=${m:0:10}
     echo Copying $1-$SERIES\_$m ...
-	rsync --progress -tuc $1/$SERIES-$TYPE-$ARCH.iso $E2B_DRIVE/$1-$SERIES\_$m.iso
+	rsync --progress -tuc $DEST$1/$SERIES-$TYPE-$ARCH.iso $E2B_DRIVE/$1-$SERIES\_$m.iso
 }
 
 # all flavours
