@@ -7,7 +7,7 @@ fi
 
 function download() {
 	# Error handling if known flavour
-	if [[ ! "${FLAVOURS[@]}" =~ "$1" ]]; then
+	if [[ ! "${FLAVOURS[*]}" =~ $1 ]]; then
     echo "ERROR: $1 does not exit"
     return
 	fi
