@@ -12,6 +12,16 @@ Uses zsync to effeciently download the changes to the file if already downloaded
  
     ```sudo apt install zsync```
 
+## Installation
+
+Before running getiso. Copy or rename ```settings-example.conf``` to ```settings.conf``` and edit to your liking.
+
+For different versions and arch edit the following lines in your ```settings.conf```:
+```
+SERIES="focal"
+TYPE="desktop"
+ARCH="amd64"
+```
 
 ## Usage
 
@@ -19,13 +29,6 @@ Uses zsync to effeciently download the changes to the file if already downloaded
 
 Will create a folder for each flavour and download the iso into it.
 
-
-For different versions and arch edit the scripts following lines:
-```
-SERIES="focal"
-TYPE="desktop"
-ARCH="amd64"
-```
 ### Select flavour download
 
 Rather than downloading all of the flavour you can  add the flavour name to download that specific flavour eg.
