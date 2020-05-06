@@ -16,7 +16,7 @@ function download() {
 	fi
 	echo $1
 	mkdir -p $DEST$1
-	cd $DEST$1
+	cd $DEST$1 || exit
 	zsync http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
 	rm *.zs-old
 	cd ..
