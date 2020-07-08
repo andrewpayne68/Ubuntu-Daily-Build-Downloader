@@ -18,7 +18,7 @@ Before running getiso. Copy or rename ```settings-example.conf``` to ```settings
 
 For different versions and arch edit the following lines in your ```settings.conf```:
 ```
-SERIES="focal"
+SERIES="groovy"
 TYPE="desktop"
 ARCH="amd64"
 ```
