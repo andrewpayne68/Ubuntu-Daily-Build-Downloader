@@ -18,7 +18,7 @@ function download() {
 	mkdir -p $DEST$1
 	cd $DEST$1 || exit
 	zsync http://cdimage.ubuntu.com/$1/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
-	rm *.zs-old
+	rm *.zs-old &> /dev/null
 	cd ..
 }
 
@@ -38,7 +38,7 @@ function info() {
 	mr=${mr:0:10}
 	#echo "$d:			Local:$ml			Remote:$mr"
 	printf "%14s %11s %11s\n" $d $ml $mr
-	rm /tmp/${1}.list
+	rm /tmp/${1}.list &> /dev/null
 }
 
 if [ $1 == "--info" ];
