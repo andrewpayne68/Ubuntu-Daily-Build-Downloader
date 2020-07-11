@@ -6,7 +6,7 @@ source settings.conf
 fi
 
 # Check to see if zsync is installed, if not, install it.
-if ! dpkg-query -W -f='${Status}' zsync | grep "ok installed"; then sudo apt install zsync; fi
+if ! dpkg-query -W -f='${Status}' zsync | grep "ok installed" &> /dev/null ; then sudo apt install zsync; fi
 
 function download() {
 	# Error handling if known flavour
