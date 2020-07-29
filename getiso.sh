@@ -18,11 +18,12 @@ function download() {
 	if [[ ! ${SERIES} = "groovy" ]]; then
 	folder="${1}/${SERIES}"
 	else
-	folder = "$1"
+	folder=$1
 	fi
 	echo ${folder}
 	mkdir -p $DEST$1
 	cd $DEST$1 || exit
+	echo "[Downloading] http://cdimage.ubuntu.com/$folder/daily-live/current/$SERIES-$TYPE-$ARCH.iso"
 	zsync http://cdimage.ubuntu.com/$folder/daily-live/current/$SERIES-$TYPE-$ARCH.iso.zsync
 	rm *.zs-old &> /dev/null
 	cd ..
