@@ -15,7 +15,7 @@ function download() {
     return
 	fi
 	# Check if not latest series
-	if [[ ! ${SERIES} = "groovy" ]]; then
+	if [[ ! ${SERIES} = "hirsute" ]]; then
 	folder="${1}/${SERIES}"
 	else
 	folder=$1
